@@ -1,0 +1,71 @@
+<mvc:View controllerName="assetinv.AssetInventory.controller.Detail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic" xmlns:footerbar="sap.ushell.ui.footerbar">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" showNavButton="{device>/system/phone}" title="{i18n>detailTitle}"
+		busy="{detailView>/busy}" busyIndicatorDelay="{detailView>/delay}">
+		<semantic:content>
+			<ObjectHeader id="objectHeader" 
+						title="{Txt50}" 
+						numberUnit="{Anln1}"
+						intro="{Anln1}" 
+								number="{Invnr}"
+						
+						
+						></ObjectHeader>
+		
+						
+		<!--	<f:SimpleForm class="editableForm" columnsL="1" columnsM="1" editable="true" emptySpanL="4" emptySpanM="4" id="newEntitySimpleForm"
+				labelSpanL="3" labelSpanM="3" layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024"
+				title="{= ${viewModel>/mode} === 'edit'? 'Edit Z_ASTINV_SRV.asset': 'New Z_ASTINV_SRV.asset'}">
+				<f:content>
+					<Label text="Anln1" required="true"/>
+					<Input name="Anln1" id="Anln1_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement"
+						enabled="{= ${viewModel>/mode} === 'edit'? false: true}" visible="true"
+						value="{ path: 'Anln1', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:12, nullable:false } }"/>
+					<Label text="Ord42" required="true"/>
+					<Input name="Ord42" id="Ord42_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement"
+						enabled="{= ${viewModel>/mode} === 'edit'? false: true}" visible="true"
+						value="{ path: 'Ord42', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:4, nullable:false } }"/>
+					<Label text="Ord43" required="true"/>
+					<Input name="Ord43" id="Ord43_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement"
+						enabled="{= ${viewModel>/mode} === 'edit'? false: true}" visible="true"
+						value="{ path: 'Ord43', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:4, nullable:false } }"/>
+					<Label text="Ivdat" required="true"/>
+					<DatePicker name="Ivdat" value="{ path: 'Ivdat', type: 'sap.ui.model.type.DateTime'}" id="Ivdat_id" 
+						enabled="{= ${viewModel>/mode} === 'edit'? false: true}" visible="true"/>
+					<Label text="Invzu" required="true"/>
+					<Input name="Invzu" id="Invzu_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement"
+						enabled="{= ${viewModel>/mode} === 'edit'? false: true}" visible="true"
+						value="{ path: 'Invzu', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:15, nullable:false } }"/>
+					<Label text="Invnr" required="true"/>
+					<Input name="Invnr" id="Invnr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement"
+						enabled="{= ${viewModel>/mode} === 'edit'? false: true}" visible="true"
+						value="{ path: 'Invnr', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:25, nullable:false } }"/>
+					<Label text="Txt50" required="true"/>
+					<Input name="Txt50" id="Txt50_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement"
+						enabled="{= ${viewModel>/mode} === 'edit'? false: true}" visible="true"
+						value="{ path: 'Txt50', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:50, nullable:false } }"/>
+					<Label text="Sernr" required="true"/>
+					<Input name="Sernr" id="Sernr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement"
+						enabled="{= ${viewModel>/mode} === 'edit'? false: true}" visible="true"
+						value="{ path: 'Sernr', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:18, nullable:false } }"/>
+				</f:content>
+			</f:SimpleForm>
+-->						
+		</semantic:content>
+		<semantic:editAction>
+			<semantic:EditAction id="edit" press="onEdit"/>
+		</semantic:editAction>
+		<semantic:customFooterContent>
+			<Button enabled="true" id="deleteButton" press="onDelete" text="Delete"/>
+		</semantic:customFooterContent>
+		<semantic:sendEmailAction>
+			<semantic:SendEmailAction id="shareEmail" press="onShareEmailPress"/>
+		</semantic:sendEmailAction>
+		<semantic:shareInJamAction>
+			<semantic:ShareInJamAction id="shareInJam" visible="{FLP>/isShareInJamActive}" press="onShareInJamPress"/>
+		</semantic:shareInJamAction>
+		<semantic:saveAsTileAction>
+			<footerbar:AddBookmarkButton id="shareTile" title="{detailView>/saveAsTileTitle}"/>
+		</semantic:saveAsTileAction>
+	</semantic:DetailPage>
+</mvc:View>

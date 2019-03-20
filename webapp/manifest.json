@@ -1,0 +1,181 @@
+{
+	"_version": "1.8.0",
+	"sap.app": {
+		"id": "assetinv.AssetInventory",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{appTitle}}",
+		"description": "{{appDescription}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "/sap/opu/odata/sap/Z_ASTINV_SRV/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "localService/metadata.xml",
+					"annotations": [
+						"annotationMainService"
+					]
+				}
+			},
+			"annotationMainService": {
+				"type": "ODataAnnotation",
+				"uri": "../annotationMainService.xml",
+				"settings": {
+					"localUri": "../annotationMainService.xml"
+				}
+			}
+		},
+		"sourceTemplate": {
+			"id": "html5projecttemplates.2masterdetailcrud",
+			"version": "1.38.11"
+		}
+	},
+	"sap.ui": {
+		"technology": "UI5",
+		"icons": {
+			"icon": "sap-icon://detail-view",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"rootView": {
+			"viewName": "assetinv.AssetInventory.view.App",
+			"type": "XML",
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.collaboration": {},
+				"sap.m": {},
+				"sap.ui.comp": {},
+				"sap.ui.core": {},
+				"sap.ui.layout": {},
+				"sap.ushell": {},
+				"sap.uxap": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "assetinv.AssetInventory.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"settings": {
+					"metadataUrlParams": {
+						"sap-documentation": "heading"
+					},
+					"defaultBindingMode": "TwoWay"
+				}
+			},
+			"@i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"uri": "i18n/i18n.properties"
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "assetinv.AssetInventory.view",
+				"controlId": "idAppControl",
+				"controlAggregation": "detailPages",
+				"bypassed": {
+					"target": [
+						"master",
+						"notFound"
+					]
+				},
+				"async": true
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "master",
+					"target": "master"
+				},
+				{
+					"pattern": "object/{objectPath}",
+					"name": "object",
+					"target": "object"
+				},
+				{
+					"pattern": "change/{objectPath}",
+					"name": "change",
+					"titleTarget": "",
+					"greedy": false,
+					"target": "change"
+				}
+			],
+			"targets": {
+				"master": {
+					"viewName": "Master",
+					"viewLevel": 1,
+					"viewId": "master",
+					"controlAggregation": "masterPages"
+				},
+				"object": {
+					"viewName": "Detail",
+					"viewId": "detail",
+					"viewLevel": 2
+				},
+				"change": {
+					"viewName": "CreateEntity",
+					"viewId": "createEntity",
+					"viewLevel": 2
+				},
+				"detailObjectNotFound": {
+					"viewName": "DetailObjectNotFound",
+					"viewId": "detailObjectNotFound"
+				},
+				"detailNoObjectsAvailable": {
+					"viewName": "DetailNoObjectsAvailable",
+					"viewId": "detailNoObjectsAvailable"
+				},
+				"notFound": {
+					"viewName": "NotFound",
+					"viewId": "notFound"
+				}
+			}
+		}
+	},
+	"sap.platform.hcp": {
+		"uri": "webapp",
+		"_version": "1.1.0"
+	},
+	"sap.platform.abap": {
+		"uri": "/sap/bc/ui5_ui5/sap/zast_inv/webapp",
+		"_version": "1.1.0"
+	}
+}

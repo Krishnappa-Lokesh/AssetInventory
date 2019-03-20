@@ -1,0 +1,71 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:l="sap.ui.layout" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic" xmlns:smart="sap.ui.comp.smartfield" xmlns="sap.m" xmlns:cd="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" controllerName="assetinv.AssetInventory.controller.CreateEntity">
+	<semantic:DetailPage id="page" navButtonPress="onNavBack" title="{viewModel>/viewTitle}" busy="{viewModel>/busy}">
+		<semantic:content>
+			<f:SimpleForm class="editableForm" columnsL="1" columnsM="1" editable="true" emptySpanL="4" emptySpanM="4" id="newEntitySimpleForm" labelSpanL="3" labelSpanM="3" layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+				<!-- title="{= ${viewModel>/mode} === 'edit'? 'Edit Asset Details': 'New Asset Details'}"> -->
+				<f:content>
+					<!-- Asset Header  -->
+<!--					<ObjectHeader title="{Txt50}" id="header0" backgroundDesign="Transparent" responsive="true" intro="{Anln1}" number="{Invnr}" titleLevel="Auto" showMarkers="true">
+					</ObjectHeader>
+-->
+					<ObjectListItem title="{Txt50}" intro="{Anln1}" number="{Invnr}">
+					    <attributes>
+					        <ObjectAttribute text="{path: 'Ivdat', type: 'sap.ui.model.type.Date'}" id="attribute4"/>
+					    </attributes>
+						<firstStatus>
+						    <ObjectStatus id="statusLocated" icon="{= ${ZAlctd} === 'Y'  ? 'sap-icon://sys-enter' : 'sap-icon://sys-error'}" state="{= ${ZAlctd} === 'Y'  ? 'Success' : 'Error'  }" visible="{= ${ZAlctd} === 'Y'  ? true : false  }"/>
+						</firstStatus>
+					</ObjectListItem>
+
+
+<!--					<Label text="Last inventory date"/>
+					<DatePicker name="Ivdat" value="{ path: 'Ivdat', type: 'sap.ui.model.type.Date'}" id="Ivdat_id" enabled="false" visible="true"/>
+-->					<!--					<Label text="Main Asset Number"/>
+					<Input name="Anln1" id="Anln1_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true" value="{ path: 'Anln1', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:12, nullable:false } }"/>
+					<Label text="Asset description"/>
+					<Input name="Txt50" id="Txt50_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true" value="{ path: 'Txt50', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:50, nullable:false } }"/>
+-->
+					<!-- Site -->
+					<Label text="{i18n>SITE}" required="true" textAlign="Initial" cd:w5g.dt.context="/assetSet"/>
+					<l:HorizontalLayout id="layoutSite">
+					<Input name="Ord42" id="Ord42_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true" value="{ path: 'Ord42', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:4, nullable:false } }" editable="false"/>
+					<Input name="ZOrd42" id="ZOrd42_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="{= ${viewModel>/mode} === 'edit'? true: false}" visible="true" value="{ path: 'ZOrd42', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:4, nullable:false } }"/>
+					</l:HorizontalLayout>
+
+					<!-- Building  -->
+					<Label text="Building" required="true"/>
+					<l:HorizontalLayout id="layoutBuilding">
+					<Input name="Ord43" id="Ord43_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true" value="{ path: 'Ord43', type: 'sap.ui.model.odata.type.String'  }"/>
+					<Input name="ZOrd43" id="ZOrd43_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="{= ${viewModel>/mode} === 'edit'? true: false}" visible="true" value="{ path: 'ZOrd43', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:4, nullable:false } }"/>
+					</l:HorizontalLayout>
+
+					<!-- Room  -->
+					<Label text="Room" required="true"/>
+					<l:HorizontalLayout id="layoutRoom">
+					<Input name="Raumn" id="Raumn_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true" value="{ path: 'Raumn', type: 'sap.ui.model.odata.type.String'  }"/>
+					<Input name="ZRaumn" id="ZRaumn_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="{= ${viewModel>/mode} === 'edit'? true: false}" visible="true" value="{ path: 'ZRaumn', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:15, nullable:false } }"/>
+					</l:HorizontalLayout>
+
+
+					<Label text="Serial number"/>
+					<l:HorizontalLayout id="layoutSlNo">
+					<Input name="Sernr" id="Sernr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="false" visible="true" value="{ path: 'Sernr', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:18, nullable:false } }"/>
+					<Input name="ZSernr" id="ZSernr_id" valueLiveUpdate="true" liveChange="_validateSaveEnablement" enabled="{= ${viewModel>/mode} === 'edit'? true: false}" visible="true" value="{ path: 'ZSernr', type: 'sap.ui.model.odata.type.String' , constraints:{ maxLength:18, nullable:false } }"/>
+					</l:HorizontalLayout>
+					
+
+
+				</f:content>
+			</f:SimpleForm>
+		</semantic:content>
+		<semantic:cancelAction>
+			<semantic:CancelAction id="cancel" press="onCancel"/>
+		</semantic:cancelAction>
+		<semantic:positiveAction>
+			<semantic:PositiveAction text="Accept" id="action0" press="onSave"/>
+		</semantic:positiveAction>
+	<semantic:negativeAction>
+	    <semantic:NegativeAction text="Reset" id="actionReset" visible="false"/>
+	</semantic:negativeAction>
+	</semantic:DetailPage>
+</mvc:View>

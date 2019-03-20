@@ -1,0 +1,42 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:semantic="sap.m.semantic" controllerName="assetinv.AssetInventory.controller.Master">
+	<semantic:MasterPage id="page" title="{masterView>/title}" showNavButton="false">
+		<semantic:subHeader>
+			<Toolbar id="headerBar">
+				<SearchField id="searchField" showRefreshButton="{= !${device>/support/touch} }" tooltip="{i18n>masterSearchTooltip}" search="onSearch" width="100%"/>
+				<Button icon="sap-icon://action-settings" width="50px" id="button0_1534387148242"/>
+			</Toolbar>
+		</semantic:subHeader>
+		<semantic:content>
+			<PullToRefresh id="pullToRefresh" visible="{device>/support/touch}" refresh="onRefresh"/>
+			<!-- For client side filtering add this to the items attribute:  parameters: {operationMode: 'Client'}}" -->
+
+
+			<IconTabHeader id="header0" select="handleIconTabBarSelect">
+				<items>
+					<IconTabFilter key="All" text="All" count="{masterView>/totalRecords}"  showAll="true" id="filterAll"/>
+					<IconTabFilter key="Open" text="Open" count="10" icon="sap-icon://task" iconColor="Critical" id="filterOpen"/>
+					<IconTabFilter key="Located" text="Located" count="10" icon="sap-icon://task" iconColor="Positive" id="filterCounted"/>
+				</items>
+			</IconTabHeader>
+
+			<List id="list" items="{ path: '/assetSet', sorter: { path: 'Txt50', descending: false }, groupHeaderFactory: '.createGroupHeader' }" busyIndicatorDelay="{masterView>/delay}" noDataText="{masterView>/noDataText}" mode="{= ${device>/system/phone} ? 'None' : 'SingleSelectMaster'}" growing="true" growingScrollToLoad="true" updateFinished="onUpdateFinished" selectionChange="onSelectionChange">
+				<items>
+					<ObjectListItem type="{= ${device>/system/phone} ? 'Active' : 'Inactive'}" press="onSelectionChange" title="{Txt50}" intro="{Anln1}" number="{Invnr}">
+						<attributes>
+							<ObjectAttribute text="{path: 'Ivdat', type: 'sap.ui.model.type.Date'}" id="attribute4"/>
+						</attributes>
+					<firstStatus>
+					    <ObjectStatus id="statusLocated" 
+					    		icon="{= ${ZAlctd} === 'Y'  ? 'sap-icon://sys-enter' : 'sap-icon://sys-error'}"  
+					    		state="{= ${ZAlctd} === 'Y'  ? 'Success' : 'Error'  }" 
+					    		visible="{= ${ZAlctd} === 'Y'  ? true : false  }"/>
+					</firstStatus>
+					</ObjectListItem>
+				</items>
+			</List>
+		</semantic:content>
+		<semantic:addAction>
+			<semantic:AddAction id="addButton" enabled="{appView>/addEnabled}" press="onAdd" visible="false"/>
+		</semantic:addAction>
+	</semantic:MasterPage>
+</mvc:View>
